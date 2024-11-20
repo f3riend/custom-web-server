@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Server</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+    <form action="/" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" required />
+      <button type="submit">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </button>
+    </form>
+    <div class="anchours">
+      <a href="#container1"><ion-icon name="play-outline"></ion-icon></a>
+      <a href="#container2"
+        ><ion-icon name="musical-notes-outline"></ion-icon
+      ></a>
+      <a href="#container3"><ion-icon name="aperture-outline"></ion-icon></a>
+    </div>
+    <div id="container1">
+      {% for mp4_file in mp4_files %}
+      <div>
+        <video width="320" height="240" controls>
+          <source
+            src="{{ url_for('static', filename='mp4/' + mp4_file) }}"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+        <p>{{ mp4_file }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div id="container2">
+      {% for mp3_file in mp3_files %}
+      <div>
+        <audio controls>
+          <source
+            src="{{ url_for('static', filename='mp3/' + mp3_file) }}"
+            type="audio/mp3"
+          />
+          Your browser does not support the audio element.
+        </audio>
+        <p>{{ mp3_file }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div id="container3">
+      {% for img_file in img_files %}
+      <div>
+        <img
+          src="{{ url_for('static', filename='img/' + img_file) }}"
+          width="200"
+          alt="{{ img_file }}"
+        />
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
